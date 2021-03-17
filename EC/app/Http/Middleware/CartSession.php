@@ -16,7 +16,7 @@ class CartSession
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
         if (!Session::has('cart')) {
             $cart = Cart::create();

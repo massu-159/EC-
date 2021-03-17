@@ -15,7 +15,7 @@ class LineItemController extends Controller
         $cart_id = Session::get('cart');
         $line_item = LineItem::where('cart_id', $cart_id)->where('product_id', $request->input('id'))->first();
 
-        if ($line_item) {
+        if ($line_item){
             $line_item->quantity += $request->input('quantity');
             $line_item->save();
         } else {
@@ -26,6 +26,13 @@ class LineItemController extends Controller
             ]);
         }
 
-        return redirect(route('product.index'));
+        return redirect(route('cart.index'));
+    }
+
+    public function delete(Request $request)
+    {
+        LineItem::destroy($request->input('id'));
+
+        return redirect(route('cart.index'));
     }
 }
